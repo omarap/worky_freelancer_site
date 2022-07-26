@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<br /><br />
+<div>
+  <h3 class="text-center">
+    <b>Selected Applicants for {{task.task_name}}</b>
+  </h3>
+  <br />
+  {% if profiles %}
+  <div class="row">
+    {% for profile in profiles %}
+    <div class="col-md-4 card-hover">
+      <div class="card card-signin my-2 p-3 shadow">
+        <span class="ml-3 mt-3">
+          <a href="{% url 'portal:profile_description' profile.id%}">
+            {% if profile.full_name %}
+            <h4 class="text-dark">
+              <b>{{profile.full_name}}</b>
+            </h4>
+            {% else %}
+            <h4 class="text-dark">
+              <b>{{profile.user.username}}</b>
+            </h4>
+            {% endif %}
+          </a>
+          <p style="font-size: 17px">
+            {{profile.user.email}}<br />
+          </p>
+          {% if profile.phone_number %}
+          <p>{{profile.phone_number}}</p>
+          {% endif %}
+
+          {% if profile.profile_picture %}
+          <img src="{{profile.profile_picture.url}}" alt="Profile image" class="img-responsive"style="overflow: hidden; text-align: center;" width="300" height="250" />
+          {% else %}
+          <p>No Profile Picture Provided!</p>
+          {% endif %}
+        </span>
+        <div class="card-footer">
+          <a
+            class="btn btn-success mr-2"
+            href="{% url 'portal:profile_description' profile.id%}"
+            >Visit Profile
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-center">
+    No applicant has been selected till now! Select some
+    <a href="{% url 'portal:applicants' task.id %}">applicant</a> first!
+  </p>
+  <br />
+  {% endif %}
+</div>
+{% endblock content %}

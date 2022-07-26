@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Projects {% endblock title%}
+{% block content %}
+<br/>
+<h1 class="text-center display-4 text-dark my-2">{% if category %}{{ category.name }}{% else %}Projects{% endif %}</h1>
+{% if projects %}
+<div class="container mx-5">
+  <div class="row">
+    {% for project in projects %}
+    <div class="card col-md-4 col-sm-6 m-3 card-hover p-3 mx-5" data-aos="zoom-in" data-aos-duration="1000">
+     <i class="fas fa-search fa-2x text-warning"></i>
+      <h5 class="card-title">{{project.project_name}}</h5>
+      <hr class="text-warning" />
+      <p class="card-text">{{project.description |truncatewords:30 }}</p>
+      <a href="{% url 'portal:project_description' project.id %}" class="btn btn-success btn-rounded my-2">View details</a>
+    </div>
+    {% endfor  %}
+  </div>
+</div>
+{% else%}
+<p class="lead text-center text-dark my-4">No Projects available</p>
+{% endif %}
+{% endblock content %}

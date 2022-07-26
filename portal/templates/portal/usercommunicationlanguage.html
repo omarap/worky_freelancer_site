@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Add a language {% endblock title%}
+{% block content %}
+<div class="container p-5 my-3 mx-auto">
+    <div class="card w-75 p-3 mx-auto card-hover" data-aos="fade-up"
+     data-aos-duration="1000">
+      <div class="card-body">
+        <div class="text-center">
+            <i class="far fa-comments text-secondary fa-4x"></i>
+            <h2 class="card-title"> Add Communication Language </h2>
+            </div>
+        <form method="post" class="pt-2 pb-4">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-warning mt-3" type="submit">Post</button>
+        </form>
+      </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Contact Form {% endblock title%}
+{% block content %}
+<style>
+      #intro {
+        background-image: url(/static/brandhub/8.jpg);
+        height: 950px;
+        background-attachment: fixed;
+      }
+
+      /* Height for devices larger than 576px */
+      @media (min-width: 992px) {
+        #intro {
+          margin-top: -58.59px;
+        }
+      }
+    </style>
+
+<div id="intro" class="container p-5 mx-auto my-3 bg-image shadow-2-strong">
+      <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="card w-75 p-4 mx-auto card-hover col-md-4 col-sm-12 col-xs-12" data-aos="fade-down-right"
+    data-aos-duration="1000">
+      <div class="">
+        <div class="text-center text-dark">
+           <i class="fas fa-user-friends fa-4x text-secondary"></i>
+            <h2 class="card-title text-center text-dark">Contact Us</h2>
+        </div>
+        <form method="post" class="text-primary">
+            {% csrf_token %}
+            {{ form|crispy }}
+        <button class="btn btn-warning mt-3 btn-lg" type="submit">SEND</button>
+        </form>
+        <div class="mt-2 text-center">
+            <button type="button" class="btn btn-dark btn-floating mx-1">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+
+            <button type="button" class="btn btn-dark btn-floating mx-1">
+              <i class="fab fa-google"></i>
+            </button>
+
+            <button type="button" class="btn btn-dark btn-floating mx-1">
+              <i class="fab fa-twitter"></i>
+            </button>
+
+            <button type="button" class="btn btn-dark btn-floating mx-1">
+              <i class="fab fa-github"></i>
+            </button>
+        </div>
+      </div>
+    </div>
+      </div>
+</div>
+{% endblock %}

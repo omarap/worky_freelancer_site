@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<br /><br />
+<div>
+  <h3 class="text-center"><b>Applied Task</b></h3>
+  <hr my-2 />
+  <div class="row">
+    {% for task, status in zipped %}
+    <div class="col-md-6">
+      <div class="card card-signin my-2 p-3 shadow">
+        <span class="ml-3 mt-3">
+          <a href=""
+            ><h4 class="text-dark">
+              <b>{{task.task.task_name}} ({{task.task.project}})</b>
+            </h4></a
+          >
+          <p style="font-size: 15px">
+            {{task.task.task_description |truncatewords:30}} -
+            <a href="{% url 'portal:task_detail' task.id %}">Read More</a>
+          </p>
+        </span>
+        <div class="card-footer">
+          {% if status == 0 %}
+          <span style="font-size: 16px"
+            >Application Status:
+            <b class="text-success text-uppercase ml-2">Selected</b></span
+          >
+          {% elif status == 1%}
+          <span style="font-size: 16px"
+            >Application Status:
+            <b class="text-primary text-uppercase ml-2">In Process</b></span
+          >
+          {% else %}
+          <span style="font-size: 16px"
+            >Application Status:
+            <b class="text-danger text-uppercase ml-2">Rejected</b></span
+          >
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} Task Application Success {% endblock title%}
+{% block content %}
+<div class="container">
+	<div class="bg-warning text-white m-5 p-3">
+		<p> You have applied for the task</p>
+	</div>
+</div>
+<div class="container bg-white">
+	<div class="text-success mt-2 mb-4 p-3 mx-5">
+		<h4 class="display-5">Check your Applied Tasks For the Project</h4>
+		<a href="{% url 'portal:applied-tasks' %}" class="btn btn-primary btn-lg px-auto mx-5">View Your Tasks</a>
+	</div>
+</div>
+{% endblock %}

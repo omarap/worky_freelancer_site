@@ -1,0 +1,141 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<br/><br/>
+<h1 class="display-4 text-center text-primary my-4" data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="2000" class="display-4">Freelancing Portal</h1>
+<div class="container my-3">
+  <div class="row">
+    <div class="card card-hover col-md-6 col-xs-12 col-sm-12" data-aos="flip-up"
+    data-aos-duration="2000">
+      <div class="row g-0">
+        <div class="col-md-4 px-5 py-5">
+          <i class="fas fa-business-time fa-6x text-danger"></i>
+        </div>
+        <div class="col-md-8 mt-1 py-3">
+          <h4 class="card-title" data-aos="fade-up" data-aos-duration="1000">i want to hire</h4>
+          <p class="card-body pt-0 mb-0" data-aos="fade-right" data-aos-duration="1000">Just give us the details about the work you need completed, and our freelancers will get it done faster, better, and cheaper than you could possibly imagine.</p>
+          <a href="{% url 'portal:post_project' %}" class="btn btn-success btn-rounded my-2" >Post a Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card card-hover col-md-6 col-xs-12 col-sm-12" data-aos="flip-up"
+    data-aos-duration="2000">
+      <div class="row g-0">
+        <div class="col-md-4 px-5 py-5">
+           <i class="fas fa-suitcase fa-6x text-danger"></i>
+        </div>
+        <div class="col-md-8 mt-1 py-3">
+          <h4 class="card-title"data-aos="fade-up" data-aos-duration="1000">i want to work</h4>
+          <p class="card-body pt-0 mb-0"  data-aos="fade-right" data-aos-duration="1000">Just give us the details about the work you need completed, and our freelancers will get it done faster, better, and cheaper than you could possibly imagine.</p>
+          <a href="{% url 'portal:projects' %}" class="btn btn-primary btn-rounded my-2">Browse Projects</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br/><br/>
+<div class="container">
+  <h1 class="text-center text-center text-primary display-4 my-3" data-aos="zoom-in-up" data-aos-duration="1000">Projects</h1>
+  <div class="row">
+    {% for category in categories %}
+    <div class="card col-md-4 col-sm-6  my-2 shadow card-hover"  data-aos="fade-right" data-aos-duration="1000">
+      <div class="card-body">
+        <h6 class="card-title">{{category.name}}</h6>
+        <p class="card-text">{{category.description}}</p>
+        <a href="{% url 'portal:project_list_by_category' category.slug %}" class="btn btn-success btn-rounded my-2">Apply for jobs</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<br/><br/>
+<div class="m-5 p-2 text-primary text-center">
+  <h1 data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="2000" class="display-4">Need something done?</h1>
+</div>
+<div class="m-2 p-2" data-aos="fade-up" data-aos-duration="2000">
+  <i class="fas fa-desktop text-warning fa-3x" data-aos="zoom-out-down" data-aos-duration="2000"></i>
+   <b class="text-primary text-uppercase mx-2 ">Post a Project</b>
+  <p>It's easy. Simply post a project you need completed and receive competitive bids from
+freelancers within minutes.</p>
+</div>
+<div class="m-2 p-2 " data-aos="fade-up" data-aos-duration="2000">
+  <i class="far fa-user text-warning fa-3x" data-aos="zoom-out-down" data-aos-duration="2000"></i><b class="text-primary text-uppercase mx-2">Choose freelancers</b>
+  <p class="mt-2 lead">Whatever your needs, there will be a freelancer to get it done: from web design, mobile app
+development, virtual assistants, product manufacturing, and graphic design (and a whole lot
+more).</p>
+</div>
+<div class="m-2 p-2" data-aos="fade-up" data-aos-duration="2000">
+  <i class="far fa-money-bill-alt text-warning fa-3x" data-aos="zoom-out-right" data-aos-duration="2000"></i>
+   <b class="text-primary text-uppercase mx-2">Get paid safely</b>
+  <p class="mt-2 lead">With secure payments and thousands of reviewed professionals to choose from,
+work handy is the simplest and safest way to get work done online.</p>
+</div>
+
+<div class="my-3 p-2 " data-aos="fade-up"
+     data-aos-duration="2000">
+    <i class="fas fa-edit fa-3x text-warning"data-aos="zoom-out-left"  data-aos-duration="2000"></i>  
+   <b class="text-primary text-uppercase">Make it Real with Freelancer</b>
+  <p class="mt-2 lead">Get some Inspirations from your skills and experiences</p>
+</div>
+
+
+<!---------How it is done------------>
+<br/><br/>
+<div class="mt-3 mb-5 mx-3 p-2 container">
+  <h1 class="text-uppercase text-primary text-center display-4" data-aos="fade-up"
+    data-aos-duration="2000">How it is done</h1>
+  <div class="row">
+    <div class="card shadow bg-white col-xs-6 col-sm-6 col-md-3 p-2 my-3 mx-5" data-aos="fade-right">
+    <h6 class="card-title text-center">Get your free account</h6>
+    <i class="far fa-user fa-3x text-center text-danger"></i>
+    <hr class="bg-warning w-100"/>
+    <p class="card-body">If you haven't signed up yet, now's the time. We can't wait to see what
+    you can do here.</p>
+  </div>
+    <div class="card shadow bg-white col-xs-6 col-sm-6 col-md-3 p-2  my-3 mx-4" data-aos="fade-left"
+    data-aos-duration="2000">
+    <h6 class="card-title text-center">Create a profile</h6>
+    <i class="far fa-id-card fa-3x text-center text-danger"></i>
+    <hr class="bg-warning w-100"/>
+    <p class="card-body">Highlight your skills, your experience, and portfolio, and indicate your desired hourly pay
+rate.</p>
+  </div>
+
+  <div class="card shadow bg-white col-xs-6 col-sm-6 col-md-3 p-2 my-3 mx-4" 
+  data-aos="fade-up-right" data-aos-duration="2000">
+    <h6 class="card-title text-center">Jobs</h6>
+    <i class="fas fa-search-dollar fa-3x text-center text-danger"></i>
+     <hr class="bg-warning w-100"/>
+    <p class="mb-0 card-body">Get jobs according to your skills, experiences and communication language</p>
+    <p class="card-body">Tell us how you want to
+receive your earnings so
+that you can be paid
+easily.
+</p>
+  </div>
+
+  <div class="card shadow bg-white col-xs-6 col-sm-6 col-md-4 p-2 my-3 mx-5" data-aos="flip-left"
+  data-aos-duration="2000">
+    <h6 class="card-title text-center">Get Paid</h6>
+    <i class="far fa-money-bill-alt fa-3x text-center text-danger"></i>
+     <hr class="bg-warning w-100"/>
+    <p class="card-body">Simplify your process. Multiply your profits.
+</p>
+  </div>
+
+  <div class="card shadow bg-white col-xs-6 col-sm-6 col-md-4 p-2 my-3 mx-5" data-aos="flip-left"
+  data-aos-duration="2000">
+    <h6 class="card-title text-center">All projects include Payments.</h6>
+    <i class="fas fa-briefcase fa-3x text-center text-danger"></i>
+    <hr class="bg-warning w-100"/>
+    <p class="card-body">get paid for all successfully completed
+work by you and your team.
+Get paid through Upwork.</p>
+  </div>
+  </div>
+</div>
+<br/>
+{% endblock content %}

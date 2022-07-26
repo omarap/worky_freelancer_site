@@ -1,0 +1,40 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Log In{% endblock title %}
+{% block content %}
+<style>
+      #intro {
+        background-image: url(/static/brandhub/1.jpg);
+        height: 100vh;
+        background-attachment: fixed;
+      }
+
+      /* Height for devices larger than 576px */
+      @media (min-width: 992px) {
+        #intro {
+          margin-top: -58.59px;
+        }
+      }
+    </style>
+<div id="intro" class="container p-5 mx-auto my-3 bg-image shadow-2-strong">
+	<div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+		<div class="card w-75  p-4 mx-auto col-sm-10 card-hover form-control" data-aos="zoom-in" data-aos-duration="1000">
+		  <div class="card-body px-1">
+		    <div class="text-center text-dark">
+	           <i class="fas fa-user-lock fa-4x"></i>
+	            <h2 class="card-title text-center">Log in</h2>
+	        </div>
+		    <form method="post" class="text-dark mb-4">
+			{% csrf_token %}
+			{{ form|crispy }}
+			<br/>
+			<button class="btn btn-success btn-lg mb-2" type="submit">login</button>
+			<p><a href="{% url 'password_reset' %}"></a></p>
+			</form>
+		  </div>
+		</div>
+	</div>	
+</div>
+
+{% endblock content %}

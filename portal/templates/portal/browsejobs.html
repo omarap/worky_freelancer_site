@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block title %}Jobs{% endblock title%}
+{% block content %}{% load static %}
+
+
+<div class="bg-white p-2 mx-2 mt-3">
+	<p class="lead text-center">Please register to add your skills, language preferences and apply for jobs/tasks/projects</p>
+</div>
+
+	<div class="ou mx-0 px-1">
+
+		<div class="ouright">
+			<div class="situation">
+				<div class="currentWorkingStatus col-md-6 mx-0 p-1">
+					<div id="appimg" style="overflow: hidden;  text-align: center; padding: 10px;" class="bg-warning img-responsive">
+					<img id="lowa"src="{% static 'icons/give-money.png' %}" class="w-50 h-50" />
+					</div>
+					<h5>Project options</h5>
+					<center>
+						<div class="styled-select w-100 h-25 list-inline">
+						<select name="credits" onchange="filter()" class="list-inline">
+							<option value="Both" selected class="list-inline-item">Both type</option>
+							<option value="Paid" class="list-inline-item">Paid</option>
+							<option value="Other" class="list-inline-item">Other</option>
+						</select>
+						</div>
+					</center><br>
+				</div>
+				<br>
+				<div class="currentWorkingStatus col-md-6 mx-0 p-1">
+					<div id="appimg" style="overflow: hidden;  text-align: center; padding: 10px;" class="bg-warning img-responsive">
+					<img id="lowa"src="{% static 'icons/java.png' %}" class="w-50 h-50" />
+					</div>
+                    <h5>Skills</h5>
+					<div class="prjt1" style="text-align: left;height: auto; max-height: 30vh; overflow-y: scroll;padding: 10px;">
+						{% for skill in skill_list %}
+						<input type="checkbox" onclick="filter()" name="skills[]" value="{{skill.skill_name}}" id="skill_{{skill.id}}">
+						<span style="padding-left:20px;">{{skill.skill_name}}</span>
+						<br>
+						{% endfor %}
+
+					</div>
+
+
+				</div>
+				<br>
+				<div class="currentWorkingStatus col-md-6 mx-0 p-1">
+					<div id="appimg" style="overflow: hidden; text-align: center; padding: 10px;" class="bg-warning img-responsive">
+						<img id="lowa"  src="{% static 'icons/translator.png' %}" class="w-50 h-50" />
+					</div>
+					<h5>Language</h5>
+					<div class="prjt2" style="text-align: left; height: auto; max-height: 30vh; overflow-y: scroll; padding: 10px;">
+						{% for language in language_list %}
+						<input type="checkbox" onclick="filter()" name="languages[]" value="{{language.language_name}}" id="language_{{language.id}}">
+						<span style="padding-left:20px;">{{language.language_name}}</span>
+						<br>
+						{% endfor %}
+					</div>
+
+				</div>
+
+			</div>
+
+
+		</div>
+
+		<div class="ouleft">
+			<div>
+				<h3 class="text-uppercase text-center">
+					<b>Jobs</b>
+				</h3>
+			</div>
+			<div class="container" id="jobs">
+				<div class="projectContainer mx-0 p-1">
+					<div class="row">
+						<div class="col col-sm-12 col-md-12 col-xs-12 mx-0 px-0" data-aos="zoom-in" data-aos-duration="1000">
+							{% include 'portal/jobs.html' %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+{% if skill_check %}
+	<script type="text/javascript">
+		var x="skill_"+{{skill_check}};
+		document.getElementById(x).checked=true;
+		filter();
+	</script>
+{% endif %}
+{% if language_check %}
+	<script type="text/javascript">
+		var y="language_"+{{language_check}};
+		console.log(y);
+		document.getElementById(y).checked=true;
+		filter();
+	</script>
+{% endif %}
+<script>
+
+	$('#back').click(function goBack() {
+		window.history.back();
+	});
+
+	function filter() {
+
+		var skills = []
+		$("input[name='skills[]']:checked").each(function () {
+			skills.push($(this).val());
+		});
+
+		var languages = $("input[name='languages[]']:checked").map(function () {
+			return this.value;
+		}).get();
+
+		var credits = $("select[name='credits']").val();
+
+		$.ajax({
+			type: "POST",
+			url: "{% url 'portal:jobs_update' %}",
+			contentType: "application/json",
+			data: JSON.stringify({ 'skills': skills, 'languages': languages, 'credits': credits }),
+			success: function (data) {
+				$("#jobs").html(data);
+			}
+		});
+
+	}
+
+	function arraysEqual(arr1, arr2) {
+		if (arr1.length !== arr2.length)
+			return false;
+		for (var i = arr1.length; i--;) {
+			if (arr1[i] !== arr2[i])
+				return false;
+		}
+
+		return true;
+	}
+
+</script>
+{% endblock content %}

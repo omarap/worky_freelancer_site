@@ -1,0 +1,144 @@
+<!-- templates/myprojects.html -->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}My projects{% endblock title%}
+{% block content %}
+
+<div class="display-4 mx-auto">
+				<h4 class="text-center ">My Projects and Tasks</h4>
+			</div>
+	<div class="ou container-fluid mx-0">
+			<div class=" mx-0">
+				<div class="lead text-center">
+					Projects with no Tasks
+				</div>
+				<div class="projectContainer">
+					{% for job in current_projects%}
+
+					<div class="proin card"  data-aos="zoom-in-down" data-aos-duration="1000">
+						<div class="inone">
+							<div style="color: #213875;">
+							<a href="{{job.get_absolute_url}}">{{job.project_name}}</a>
+							</div>
+							<div style="color: black;font-size:15px;">
+								Added On    {{job.postedOn}}
+							</div>
+						</div>
+
+						<div class="intwo">
+							<div class="inpt">
+								{% if job.credits == 'Paid' %}
+								  {{job.amount}}
+								{% else %}
+								 {{job.mention}}
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+
+				</div>
+
+			</div>
+
+			<br>
+			<br>
+			<div class="mx-0">
+				<div class="lead text-center mx-auto">
+					Active Tasks
+				</div>
+				<div class="projectContainer">
+					{% for job in active%}
+
+					<div class="proin card "data-aos="zoom-in" data-aos-duration="1000">
+						<div class="inone">
+							  <div style="color: #213875;">
+								<a href="{% url 'portal:task_description' job.project.id job.id %}">{{job.task_name}}</a>&emsp;
+								{% ifequal request.user.username job.project.leader.user.username %}
+									<b>Leader</b>
+								{% else %}
+									<b>Working</b>
+								{% endifequal %}
+							  </div>
+
+							  <div style="color: #213875;font-size:15px;">
+							A task from <a href="{%url 'portal:project_description' job.project.id %}">{{job.project.project_name}}</a> Project
+							  </div>
+
+							<div style="color: black;font-size:15px;">
+								Added On     {{job.addedOn}}
+							</div>
+						</div>
+
+						<div class="intwo">
+							<div class="inpt">
+								{% if job.credits == 'Paid' %}
+								  {{job.amount}}
+								{% else %}
+								 {{job.mention}}
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+
+				</div>
+
+			</div>
+
+			<br>
+			<br>
+
+			<div class="mx-auto">
+				<div class="lead text-center">
+					Completed Tasks
+				</div>
+				<div class="projectContainer mx-auto">
+					{% for job in completed %}
+					<div class="proin card" data-aos="zoom-out-up" data-aos-duration="1000">
+						<div class="inone">
+							  <div style="color: #213875;">
+								<a href="{% url 'portal:task_description' job.project.id job.id %}">{{job.task_name}}</a>
+								&emsp;
+								{% ifequal request.user.username job.project.leader.user.username %}
+									<b>Leader</b>
+								{% else %}
+									<b>Working</b>
+								{% endifequal %}
+							  </div>
+
+							  <div style="color: #213875;font-size:15px;">
+							A task from <a href="{%url 'Portal:project_description' job.project.id %}">{{job.project.project_name}}</a> Project
+							  </div>
+
+							<div style="color: black;font-size:15px;">
+								Added On     {{job.addedOn}}
+							</div>
+						</div>
+
+						<div class="intwo">
+							<div class="inpt">
+								{% if job.credits == 'Paid' %}
+								  {{job.amount}}
+								{% else %}
+								 {{job.mention}}
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+
+				</div>
+			</div>
+
+		</div>
+
+<script>
+
+		$('#back').click(function goBack() {
+			window.history.back();
+		});
+
+</script>
+
+{% endblock content %}

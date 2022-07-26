@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<br /><br />
+<div>
+  <h3 class="text-center"><b>Applied Task Details</b></h3>
+  <hr my-2 />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-signin my-2 p-3 shadow">
+        <span class="ml-3 mt-3">
+          <a href=""
+            ><h4 class="text-dark text-center">
+              <b>{{task.task.task_name}} ({{task.task.project}})</b>
+            </h4></a
+          >
+          <p style="font-size: 15px" class="text-center">
+            {{task.task.task_description}}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,74 @@
+<!-- templates/signup.html -->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Sign Up{% endblock title%}
+{% block content %}
+<style>
+
+.bg-image {
+  /* The image used */
+  background-image: url(/static/brandhub/james-healy-WZ-YnvCCLug-unsplash.jpg);
+
+  /* Add the blur effect */
+  filter: blur(0px);
+  -webkit-filter: blur(0px);
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Position text in the middle of the page/image */
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  z-index: 2;
+  width: 100%;
+  padding: 20px;
+}
+</style>
+<br/>
+<div class="container p-5 mx-auto mt-0 mb-3 bg-image">
+	<div class="row">
+		<div class="card w-75 p-2 mx-auto card-hover bg-text text-white col-md-8 col-sm-8 col-xs-8" 
+		data-aos="fade-up-right"
+	data-aos-duration="1000">
+	  <div class="card-body text-white">
+	  	<div class="text-center text-white">
+	  		<i class="fas fa-user-circle fa-4x"></i>
+	    	<h2 class="card-title">Sign up</h2>
+	  	</div>
+	    <form method="post" class="text-white">
+				{% csrf_token %}
+				{{ form|crispy }}
+		<button class="btn btn-success my-3 btn-rounded" type="submit">Register</button>
+		</form>
+		<div class="mt-2 text-center">
+            <button type="button" class="btn btn-light  btn-floating mx-1">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+
+            <button type="button" class="btn btn-light  btn-floating mx-1">
+              <i class="fab fa-google"></i>
+            </button>
+
+            <button type="button" class="btn btn-light  btn-floating mx-1">
+              <i class="fab fa-twitter"></i>
+            </button>
+
+            <button type="button" class="btn btn-light  btn-floating mx-1">
+              <i class="fab fa-github"></i>
+            </button>
+        </div>
+	  </div>
+	</div>
+	</div>
+</div>
+{% endblock content %}
